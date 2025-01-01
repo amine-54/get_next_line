@@ -15,21 +15,21 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char    *ft_strchr(const char *s, int c)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
-		i++;
-	}
-	if ((char)c == '\0')
-		return ((char *)&s[i]);
-	return (NULL);
+    if (!s)
+        return (NULL);
+    while (*s)
+    {
+        if (*s == (char)c)
+            return ((char *)s);
+        s++;
+    }
+    if ((char)c == '\0')
+        return ((char *)s);
+    return (NULL);
 }
+
 
 /*
 char	*ft_strjoin(char *s1, char *s2)
@@ -156,7 +156,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 
 	bytes_read = 1;
-	while (bytes_read != 0 && ft_strchr(leftover, '\n') == NULL)
+	while (!ft_strchr(leftover, '\n') && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
@@ -169,7 +169,7 @@ char	*get_next_line(int fd)
 	}
 	free(buffer);
 
-	if (leftover ==  NULL)
+	if (!leftover)
 		return (NULL);
 	line = extract_line(leftover);
 	leftover = update_leftover(leftover);
