@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-
-#define BUFFER_SIZE 5
+#include "get_next_line.h"
 
 char	*extract_line(char *leftover)
 {
@@ -88,3 +83,26 @@ char	*get_next_line(int fd)
 	leftover = update_leftover(leftover);
 	return (line);
 }
+
+int main()
+{
+    char *line;
+	int num = 1;
+    int fd = open("file.txt", O_RDWR);
+
+    while ((line = get_next_line(fd)))
+    {
+		if (!line)
+		{
+			printf("{!} line was not allocated. exiting...\n");
+			return (1);
+		}
+        printf("{+} line %d: %s", num, line);
+        free(line);
+		num++;
+    }
+
+    close(fd);
+    return (0);
+}
+
