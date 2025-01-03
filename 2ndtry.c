@@ -8,7 +8,7 @@
 char	*extract_line(char *leftover)
 {
 	char	*line;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (leftover[i] && leftover[i] != '\n')
@@ -28,15 +28,14 @@ char	*extract_line(char *leftover)
 		i++;
 	}
 	line[i] = '\0';
-
 	return (line);
 }
 
 char	*update_leftover(char *leftover)
 {
 	char	*new_leftover;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (leftover[i] && leftover[i] != '\n')
@@ -49,13 +48,14 @@ char	*update_leftover(char *leftover)
 	while (leftover[i])
 	{
 		new_leftover[j] = leftover[i];
-		i++;
 		j++;
+		i++;
 	}
-	free(leftover);
 	new_leftover[j] = '\0';
+	free(leftover);
 	return (new_leftover);
 }
+
 
 char	*get_next_line(int fd)
 {
@@ -72,10 +72,10 @@ char	*get_next_line(int fd)
 		return (NULL);
 
 	bytes_read = 1;
-	while (bytes_read != 0 !! ft_strchr(leftover, '\n') == NULL)
+	while (ft_strchr(leftover, '\n') == NULL && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read = -1)
+		if (bytes_read == -1)
 		{
 			free(buffer);
 			return (NULL);
@@ -84,11 +84,7 @@ char	*get_next_line(int fd)
 		leftover = ft_strjoin(leftover, buffer);
 	}
 	free(buffer);
-
-	if (leftover == NULL)
-		return (NULL);
 	line = extract_line(leftover);
 	leftover = update_leftover(leftover);
-
 	return (line);
 }

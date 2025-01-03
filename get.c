@@ -154,7 +154,6 @@ char	*get_next_line(int fd)
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buffer == NULL)
 		return (NULL);
-
 	bytes_read = 1;
 	while (!ft_strchr(leftover, '\n') && bytes_read != 0)
 	{
@@ -179,18 +178,20 @@ char	*get_next_line(int fd)
 
 int main()
 {
-    int fd = open("file.txt", O_CREAT | O_RDWR, 0644);
-    if (fd == -1)
-    {
-        perror("Error opening file");
-        return (1);
-    }
-
     char *line;
+	int num = 1;
+    int fd = open("file.txt", O_RDWR);
+
     while ((line = get_next_line(fd)))
     {
-        printf("%s", line);
+		if (!line)
+		{
+			printf("{!} line was not allocated. exiting...\n");
+			return (1);
+		}
+        printf("{+} line %d: %s", num, line);
         free(line);
+		num++;
     }
 
     close(fd);
