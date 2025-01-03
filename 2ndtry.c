@@ -70,6 +70,8 @@ char	*get_next_line(int fd)
 	while (ft_strchr(leftover, '\n') == NULL && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		printf("[DEBUG] Bytes read: %zd\n", bytes_read);
+		printf("[DEBUG] Buffer content: %s\n", buffer);
 		if (bytes_read == -1)
 		{
 			free(buffer);
@@ -77,8 +79,18 @@ char	*get_next_line(int fd)
 		}
 		buffer[bytes_read] = '\0';
 		leftover = ft_strjoin(leftover, buffer);
+		printf("[DEBUG] Lefitover after join: %s\n", leftover);
 	}
+	if (leftover[0] == '\0')
+		return (NULL);
 	free(buffer);
+	/*
+	if (!leftover || leftover[0] == '\0')
+	{
+		free(leftover);
+		leftover = NULL;
+		return (NULL); // No more content to read
+	}*/
 	line = extract_line(leftover);
 	leftover = update_leftover(leftover);
 	return (line);
