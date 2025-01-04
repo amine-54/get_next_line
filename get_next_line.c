@@ -6,7 +6,7 @@
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2025/01/04 16:53:30 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/04 17:10:13 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*actual_line(char *holder)
 	int		i;
 
 	i = 0;
-	if (holder[i] == '\0') // haaaa li nsit w 7m9aatni waaa
+	if (holder[i] == '\0')
 		return (NULL);
 	while (holder[i] && holder[i] != '\n')
 		i++;
@@ -46,15 +46,9 @@ char	*update_holder(char *holder)
 	int		i;
 	int		j;
 
-	if (holder == NULL || holder[0] == '\0')
-	{
-		free(holder);
-		return (NULL);
-	}
 	i = 0;
 	while (holder[i] && holder[i] != '\n')
 		i++;
-	
 	if (holder[i] == '\0')
 	{
 		free(holder);
@@ -72,35 +66,9 @@ char	*update_holder(char *holder)
 		i++;
 	}
 	new_holder[j] = '\0';
-	free(holder);
-	return (new_holder);
+	//free(holder);
+	return (free(holder), new_holder);
 }
-/*
-char	*read_and_hold(int fd, char *holding)
-{
-	char	*buffer;
-	ssize_t	bytes_returned;
-
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (buffer == NULL)
-		return (NULL);
-	bytes_returned = 1;
-	while (ft_strchr(holding, '\n') == NULL && bytes_returned != 0)
-	{
-		bytes_returned = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_returned == -1)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		buffer[bytes_returned] = '\0';
-		holding = ft_strjoin(holding , buffer);
-	}
-	free(buffer);
-	return (holding);
-}*/
 
 char	*get_next_line(int fd)
 {
@@ -126,10 +94,9 @@ char	*get_next_line(int fd)
 		buffer[bytes_returned] = '\0';
 		holder = ft_strjoin(holder, buffer);
 	}
-	free(buffer);
 	line = actual_line(holder);
 	holder = update_holder(holder);
-	return (line);
+	return (free(buffer), line);
 }
 
 /*
@@ -148,7 +115,7 @@ int main()
 }
 */
 
-
+/*
 int main()
 {
     char *line;
@@ -170,4 +137,4 @@ int main()
     close(fd);
     return (0);
 }
-
+*/
