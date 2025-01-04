@@ -6,86 +6,88 @@
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2024/12/22 18:19:39 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/04 13:59:25 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#define BUFFER_SIZE 3
+#include "get_next_line.h"
+
+char	*actual_line(char *holder)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	while (holder[i] && holder[i] != '\n')
+		i++;
+	line = malloc(sizeof(char) * (i + 2));
+	if (line == NULL)
+		return (NULL);
+	i = 0;
+	while (holder[i] && holder[i] != '\n')
+	{
+		line[i] = holder[i];
+		i++;
+	}
+	if (holder[i] == '\n')
+	{
+		line[i] = '\n';
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
+}
+
+char	*update_holder(char *holder)
+{
+	char	*new_holder;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (holder[i] && holder[i] != '\n')
+		i++;
+	new_holder = malloc(sizeof(char) * (ft_strlen(holder) - i + 1));
+	if (new_holder == NULL)
+		return (NULL);
+	j = 0;
+	while (holder[i])
+	{
+		new_holder[j] = holder[i];
+		j++;
+		i++;
+	}
+	new_holder[j] = '\0';
+	free(holder);
+	return (new_holder);
+}
 
 char	*get_next_line(int fd)
 {
-	char buffer[BUFFER_SIZE + 1];
-	ssize_t bytes_read;
-	int i = 0;
-	char *line;
-	int found_new_line = 0;
+	static char	*holder;
+	char		*buffer;
+	char		*line;
+	ssize_t		bytes_returned;
 
-	bytes_read = 1;
-	while (found_new_line == 0 && bytes_read > 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (buffer == NULL)
+		return (NULL);
+	bytes_returned = 1;
+	while (ft_strchr(holder, '\n') == NULL && bytes_returned != 0)
 	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		buffer[bytes_read] = '\0';
-		i = 0;
-		while (buffer[i])
+		bytes_returned = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_returned == -1)
 		{
-			if (buffer[i] == '\n')
-			{
-				found_new_line = 1;
-				break;
-			}
-			i++;
-		}
-		int line_len = ft_strlen(line);
-		char *temp = malloc(bytes_read + line_len + 1);
-		if (temp == NULL)
-		{
-			if (line)
-				free(line);
+			free(buffer);
 			return (NULL);
 		}
-		int j = 0;
-		if (line)
-		{
-			while (j < line_len)
-			{
-				temp[j] = line[j];
-				j++;
-			}
-			free(line);
-		}
-		i = 0;
-		while (buffer[i])
-		{
-			temp[j] = buffer[i];
-			j++;
-			i++;
-		}
-		temp[j] = '\0';
-		line = temp;
+		holder = ft_strjoin(holder, buffer);
 	}
-
-	i = 0;
-	while (line[i] && line[i] != '\n')
-		i++;
-	char *next_line = malloc(i + 2);
-	if (next_line == NULL)
+	if (holder == NULL)
 		return (NULL);
-	while (line[i] && line[i] != '\n')
-	{
-		next_line
-
-
-}
-
-
-
-
-int main()
-{
-	int fd = open("file.txt", O_RDWR);
-	printf("%s\n", get_next_line(fd));
+	line = actual_line(holder);
+	holder = update_holder(holder);
+	return (line);
 }
