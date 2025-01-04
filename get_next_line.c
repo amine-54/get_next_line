@@ -6,7 +6,7 @@
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2025/01/04 17:10:13 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/04 17:54:02 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	*update_holder(char *holder)
 		i++;
 	}
 	new_holder[j] = '\0';
-	//free(holder);
 	return (free(holder), new_holder);
 }
 
