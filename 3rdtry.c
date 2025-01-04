@@ -6,7 +6,7 @@
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2025/01/04 16:53:30 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/04 16:52:13 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,50 @@ char	*read_and_hold(int fd, char *holding)
 	free(buffer);
 	return (holding);
 }*/
+/*
+char	*get_next_line(int fd)
+{
+	static char	*holder = NULL; // Initialize holder to NULL
+	char		*buffer;
+	char		*line;
+	ssize_t		bytes_returned;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (buffer == NULL)
+		return (NULL);
+
+	bytes_returned = 1;
+	while (ft_strchr(holder, '\n') == NULL && bytes_returned != 0)
+	{
+		bytes_returned = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_returned == -1)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		buffer[bytes_returned] = '\0';
+		holder = ft_strjoin(holder, buffer);
+	}
+
+	free(buffer); // Free buffer after use
+
+	if (holder == NULL || holder[0] == '\0') // Check if holder is NULL or empty
+	{
+		free(holder); // Free holder if it's not NULL
+		holder = NULL; // Reset holder to NULL
+		return (NULL);
+	}
+
+	line = actual_line(holder); // Allocate memory for line
+	holder = update_holder(holder); // update_holder will reset holder to NULL if needed
+
+	return (line); // Return the allocated line
+}
+*/
+
 
 char	*get_next_line(int fd)
 {
@@ -127,8 +171,16 @@ char	*get_next_line(int fd)
 		holder = ft_strjoin(holder, buffer);
 	}
 	free(buffer);
+	//holder = read_and_hold(fd, holder);
+	/*if (holder[0] == '\0')
+	{
+		free(holder);
+		return (NULL);
+	}*/
 	line = actual_line(holder);
 	holder = update_holder(holder);
+	//if (holder == NULL)
+	//	return (NULL);
 	return (line);
 }
 
