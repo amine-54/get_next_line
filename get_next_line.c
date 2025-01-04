@@ -6,7 +6,7 @@
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2025/01/04 16:35:32 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/04 16:47:33 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*actual_line(char *holder)
 	int		i;
 
 	i = 0;
+	if (holder[i] == '\0')
+		return (NULL);
 	while (holder[i] && holder[i] != '\n')
 		i++;
 	line = malloc(sizeof(char) * (i + 2));
