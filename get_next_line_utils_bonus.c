@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2025/01/04 16:22:56 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/05 23:57:37 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+
+ // UTILS DYAL BONUS 9lb ch khas ykon fih m3rt wch hadchi li lta7t khas ykon wla la
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
