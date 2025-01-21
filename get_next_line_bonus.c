@@ -6,15 +6,11 @@
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2025/01/05 23:58:18 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:23:51 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-//khdem bonus hna
-/
-
+#include "get_next_line_bonus.h"
 
 char	*actual_line(char *holder)
 {
@@ -75,7 +71,7 @@ char	*update_holder(char *holder)
 
 char	*get_next_line(int fd)
 {
-	static char	*holder;
+	static char	*holder[1024];
 	char		*buffer;
 	char		*line;
 	ssize_t		bytes_returned;
@@ -86,7 +82,7 @@ char	*get_next_line(int fd)
 	if (buffer == NULL)
 		return (NULL);
 	bytes_returned = 1;
-	while (ft_strchr(holder, '\n') == NULL && bytes_returned != 0)
+	while (ft_strchr(holder[fd], '\n') == NULL && bytes_returned != 0)
 	{
 		bytes_returned = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_returned == -1)
@@ -95,49 +91,9 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		buffer[bytes_returned] = '\0';
-		holder = ft_strjoin(holder, buffer);
+		holder[fd] = ft_strjoin(holder[fd], buffer);
 	}
-	line = actual_line(holder);
-	holder = update_holder(holder);
+	line = actual_line(holder[fd]);
+	holder[fd] = update_holder(holder[fd]);
 	return (free(buffer), line);
 }
-
-/*
-int main()
-{
-	int fd;
-
-	fd = open("file.txt", O_RDWR);
-
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	if (get_next_line(fd) == NULL)
-		printf("debugng line");
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-}
-*/
-
-/*
-int main()
-{
-    char *line;
-	int num = 1;
-    int fd = open("file.txt", O_RDWR);
-
-    while ((line = get_next_line(fd)))
-    {
-		if (!line)
-		{
-			printf("{!} line was not allocated. exiting...\n");
-			return (1);
-		}
-        printf("{+} line %d: %s", num, line);
-        free(line);
-		num++;
-    }
-
-    close(fd);
-    return (0);
-}
-*/

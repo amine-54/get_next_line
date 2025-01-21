@@ -6,11 +6,11 @@
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2025/01/05 23:57:37 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:11:14 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 
  // UTILS DYAL BONUS 9lb ch khas ykon fih m3rt wch hadchi li lta7t khas ykon wla la

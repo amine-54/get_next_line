@@ -6,7 +6,7 @@
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2025/01/04 17:54:02 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:24:09 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,43 +97,3 @@ char	*get_next_line(int fd)
 	holder = update_holder(holder);
 	return (free(buffer), line);
 }
-
-/*
-int main()
-{
-	int fd;
-
-	fd = open("file.txt", O_RDWR);
-
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	if (get_next_line(fd) == NULL)
-		printf("debugng line");
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-}
-*/
-
-/*
-int main()
-{
-    char *line;
-	int num = 1;
-    int fd = open("file.txt", O_RDWR);
-
-    while ((line = get_next_line(fd)))
-    {
-		if (!line)
-		{
-			printf("{!} line was not allocated. exiting...\n");
-			return (1);
-		}
-        printf("{+} line %d: %s", num, line);
-        free(line);
-		num++;
-    }
-
-    close(fd);
-    return (0);
-}
-*/
