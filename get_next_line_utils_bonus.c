@@ -6,14 +6,12 @@
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2025/01/21 17:11:14 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:28:38 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-
- // UTILS DYAL BONUS 9lb ch khas ykon fih m3rt wch hadchi li lta7t khas ykon wla la
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -52,20 +50,14 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1 = malloc(1);
 		if (s1 == NULL)
 			return (NULL);
-		s1[0]= '\0';
+		s1[0] = '\0';
 	}
 	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (str == NULL)
-	{
-		free(s1);
-		return (NULL);
-	}
-	i = 0;
-	while (s1[i])
-	{
+		return (free(s1), NULL);
+	i = -1;
+	while (s1[++i])
 		str[i] = s1[i];
-		i++;
-	}
 	j = 0;
 	while (s2[j])
 	{
@@ -73,6 +65,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	str[i + j] = '\0';
-	free(s1);
-	return(str);
+	return (free(s1), str);
 }
