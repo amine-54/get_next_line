@@ -6,7 +6,7 @@
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2025/01/21 17:29:23 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:40:11 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#ifndef BUFFER_SIZE
+//#ifndef BUFFER_SIZE
 #define BUFFER_SIZE 5
-#endif
+//#endif
 
 char	*get_next_line(int fd);
 char	*actual_line(char *holder);

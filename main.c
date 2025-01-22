@@ -23,6 +23,8 @@ int main()
     return (0);
 }
 */
+
+/*
 int main()
 {
 	char	*line;
@@ -33,4 +35,31 @@ int main()
 		free(line);
 	}
 	close(fd);
+}
+*/
+
+
+int main()
+{
+    char *line1, *line2;
+    int fd = open("file.txt", O_RDONLY);
+    int fd1 = open("get_next_line.h", O_RDONLY);
+
+    if (fd == -1 || fd1 == -1) {
+        return 1;
+    }
+
+    printf("-----\n");
+	while((line1 = get_next_line(fd)))
+	{
+		printf("%s", line1);
+		free(line1);
+	}
+	while((line2 = get_next_line(fd1)))
+	{
+		printf("%s", line2);
+		free(line2);
+	}
+	close(fd);
+	close(fd1);
 }
