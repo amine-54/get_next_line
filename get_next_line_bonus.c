@@ -6,7 +6,7 @@
 /*   By: mmanyani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 11:15:05 by mmanyani          #+#    #+#             */
-/*   Updated: 2025/01/21 17:23:51 by mmanyani         ###   ########.fr       */
+/*   Updated: 2025/01/23 13:52:16 by mmanyani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	ssize_t		bytes_returned;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buffer == NULL)
